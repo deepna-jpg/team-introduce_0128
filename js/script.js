@@ -23,27 +23,27 @@ const dataManager = {
     // Dummy Data for visual testing
     members: [
         new TeamMember(
-            "김팀장",
-            "PM / Publishing",
-            "전체 일정 관리, 구조 설계",
-            "팀의 중심을 잡는 리더입니다.",
-            "HTML/CSS, Communication",
+            "지현",
+            "기획 · 구조 설계",
+            "사용자 목적 정리, 기능 범위 결정, 문서화",
+            "서비스의 목적과 사용자를 정의하고, 팀이 흔들리지 않도록 기준을 만듭니다.",
+            "문제정의, 정보 구조화, 의사결정 기준 수립",
             "https://via.placeholder.com/150"
         ),
         new TeamMember(
-            "이디자이너",
-            "UI/UX Design",
-            "화면 설계, 디자인 시스템",
-            "사용자 경험을 최우선으로 생각합니다.",
-            "Figma, CSS Animation",
+            "나연",
+            "UI/UX 디자인",
+            "와이어프레임, 화면 설계, 시각적 완성도",
+            "정보가 가장 잘 보이도록 화면의 흐름과 위계를 설계합니다.",
+            "가독성 중심 설계, 레이아웃 구성, 디자인 일관성",
             "https://via.placeholder.com/150"
         ),
         new TeamMember(
-            "박개발자",
-            "Frontend Dev",
-            "로직 구현, 데이터 바인딩",
-            "효율적인 코드를 작성합니다.",
-            "JavaScript, React",
+            "아윤",
+            "프론트엔드 개발",
+            "페이지 구현, 데이터 연동, 반응형 대응",
+            "설계된 구조를 안정적으로 구현하고, 유지보수가 쉬운 코드로 정리합니다.",
+            "컴포넌트 설계, 구조화된 코드, 배포 환경 구성",
             "https://via.placeholder.com/150"
         )
     ],

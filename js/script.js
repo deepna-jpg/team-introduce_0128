@@ -21,6 +21,10 @@ class TeamMember {
  */
 const dataManager = {
     // Dummy Data for visual testing
+    teamInfo: {
+        name: "KPU",
+        description: "기획·디자인·개발이 분리되지 않고, 하나의 흐름으로 함께 작업합니다."
+    },
     members: [
         new TeamMember(
             "지현",
@@ -58,7 +62,7 @@ const dataManager = {
  * Handles DOM manipulation
  */
 const renderer = {
-    container: document.getElementById('team-container'),
+    container: document.getElementById('teamGrid'),
 
     createCardElement(member) {
         const cardDiv = document.createElement('div');
@@ -89,6 +93,15 @@ const renderer = {
         return cardDiv;
     },
 
+    renderTeamInfo() {
+        const info = dataManager.teamInfo;
+        const headerTitle = document.querySelector('header h1');
+        const headerQuote = document.querySelector('.team-quote');
+
+        if (headerTitle) headerTitle.textContent = info.name;
+        if (headerQuote) headerQuote.textContent = info.description;
+    },
+
     renderAll() {
         const members = dataManager.getAllMembers();
         if (!this.container) return; // Guard clause
@@ -103,6 +116,7 @@ const renderer = {
 
 // Initialize on window load
 window.addEventListener('DOMContentLoaded', () => {
+    renderer.renderTeamInfo();
     renderer.renderAll();
     console.log("Team Introduction Page Initialized");
 });

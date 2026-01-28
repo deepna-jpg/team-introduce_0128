@@ -27,20 +27,20 @@ const dataManager = {
     },
     members: [
         new TeamMember(
-            "지현",
+            "나연",
             "기획 · 구조 설계",
             "사용자 목적 정리, 기능 범위 결정, 문서화",
             "서비스의 목적과 사용자를 정의하고, 팀이 흔들리지 않도록 기준을 만듭니다.",
             "문제정의, 정보 구조화, 의사결정 기준 수립",
-            "https://via.placeholder.com/150"
+            "images/1.png"
         ),
         new TeamMember(
-            "나연",
+            "지현",
             "UI/UX 디자인",
             "와이어프레임, 화면 설계, 시각적 완성도",
             "정보가 가장 잘 보이도록 화면의 흐름과 위계를 설계합니다.",
             "가독성 중심 설계, 레이아웃 구성, 디자인 일관성",
-            "https://via.placeholder.com/150"
+            "images/2.png"
         ),
         new TeamMember(
             "아윤",
@@ -48,7 +48,7 @@ const dataManager = {
             "페이지 구현, 데이터 연동, 반응형 대응",
             "설계된 구조를 안정적으로 구현하고, 유지보수가 쉬운 코드로 정리합니다.",
             "컴포넌트 설계, 구조화된 코드, 배포 환경 구성",
-            "https://via.placeholder.com/150"
+            "images/3.png"
         )
     ],
 

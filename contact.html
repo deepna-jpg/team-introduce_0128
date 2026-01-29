@@ -10,11 +10,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
 
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+    <!-- Background Decorative Circles -->
+    <div class="bg-circles">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+
     <header>
+        <div class="theme-toggle-container">
+            <button id="themeToggle">🌙 Dark Mode</button>
+        </div>
         <div class="header-content">
             <h1>Contact Team</h1>
             <p class="team-quote">"Always ready to listen."</p>
@@ -22,29 +34,50 @@
     </header>
 
     <main>
-        <div class="card"
-            style="margin: 0 auto; cursor: default; height: auto; padding: 2rem; background-color: rgba(255, 255, 255, 0.1); border: 2px solid #ffffff; color: #ffffff;">
-            <div style="text-align: center;">
-                <h2 style="color: #ffffff;">Contact Information</h2>
-                <br>
-                <p><strong>Email:</strong> contact@team128.com</p>
-                <p><strong>Phone:</strong> 02-1234-5678</p>
-                <p><strong>Location:</strong> Seoul, Korea</p>
-                <br>
-                <h3 style="color: #ffffff;">Send us a message!</h3>
-                <p>We are looking forward to hearing from you.</p>
-                <br>
-                <!-- Reuse the button style but modify slightly for "Go Back" look -->
-                <a href="index.html" class="contact-btn"
-                    style="background-color: transparent; border: 1px solid #ffffff; color: #ffffff;">Go Back
-                    Home</a>
+        <div class="card contact-card">
+            <div class="contact-header">
+                <h2>Send us a Message</h2>
+                <p>궁금한 점이나 전하고 싶은 말이 있다면 남겨주세요.</p>
             </div>
+
+            <form id="contactForm" class="contact-form">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> 이름 (Name)</label>
+                    <input type="text" id="name" name="name" placeholder="이름을 입력해주세요" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone"><i class="fas fa-phone"></i> 전화번호 (Phone)</label>
+                    <input type="tel" id="phone" name="phone" placeholder="010-0000-0000"
+                        pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> 이메일 (Email)</label>
+                    <input type="email" id="email" name="email" placeholder="example@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="memo"><i class="fas fa-comment"></i> 메모 (Memo)</label>
+                    <textarea id="memo" name="memo" rows="5" placeholder="전하고 싶은 내용을 자유롭게 적어주세요." required></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="contact-btn submit-btn">
+                        <i class="fas fa-paper-plane"></i> 전송하기
+                    </button>
+                    <a href="index.html" class="contact-btn back-btn">
+                        <i class="fas fa-arrow-left"></i> 돌아가기
+                    </a>
+                </div>
+            </form>
         </div>
     </main>
 
     <footer>
         <p>&copy; 2026 Team Introduction Project. All rights reserved.</p>
     </footer>
+    <script src="js/script.js"></script>
 </body>
 
 </html>

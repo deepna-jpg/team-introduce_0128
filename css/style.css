@@ -316,11 +316,12 @@ main {
     transition: all 0.3s ease;
     border: 1px solid var(--glass-border);
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
     flex: 1;
+    width: auto;
 }
 
 .submit-btn {

@@ -56,6 +56,9 @@ body {
     animation: gradientBG 15s ease infinite;
     color: var(--text-color);
     line-height: 1.6;
+    /* Sticky Footer Setup */
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
     transition: color var(--transition-speed);
     overflow-x: hidden;
@@ -161,18 +164,182 @@ header {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Step B-2. Grid Layout */
+.team-quote {
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* Contact Button */
+.contact-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.8rem 1.5rem;
+    background-color: #fff;
+    color: #3e000c;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.contact-btn:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+}
+
+/* Main Container Styles */
 main {
     max-width: 1200px;
     margin: 2rem auto;
     padding: 0 1.5rem;
+    flex: 1;
+    /* Pushes footer down */
+    width: 100%;
+    /* Ensure full width */
 }
 
+/* Step B-2. Grid Layout */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2.5rem;
     padding: 2rem 0;
+}
+
+/* Contact Page Specifics */
+.contact-card {
+    max-width: 600px;
+    margin: 0 auto;
+    cursor: default;
+    height: auto !important;
+    /* STRICTLY DYNAMIC HEIGHT */
+
+    /* Visual Styles (Copied from .card-front) */
+    background-color: #ffffdd;
+    /* Keep original contact card color for contrast */
+    border: 4px solid #3e000c;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    padding: 1rem 2.5rem;
+    /* Reduced top padding */
+    padding-bottom: 5rem !important;
+    /* Force space below content */
+    margin-bottom: 3rem;
+    /* Space between card and footer */
+
+    /* Disable Flip/Move Effects */
+    transform: none !important;
+    transition: none !important;
+}
+
+/* Explicitly disable hover effect for contact card */
+.contact-card:hover {
+    transform: none !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Form Styles */
+.contact-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.contact-header h2 {
+    color: #3e000c;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-form .form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #3e000c;
+}
+
+.contact-form label i {
+    margin-right: 8px;
+    color: #3e000c;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #3e000c;
+    /* Burgundy Highlight */
+    box-shadow: 0 0 0 3px rgba(62, 0, 12, 0.1);
+}
+
+.form-actions {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+/* Footer Styling */
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: auto;
+    /* Push to bottom if flex fails */
+    color: var(--text-color);
+}
+
+.submit-btn {
+    flex: 2;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #3e000c;
+    /* Burgundy */
+    color: #fff;
+    /* White text */
+    transform: translateY(-2px);
+}
+
+.back-btn {
+    flex: 1;
+    text-align: center;
+    background-color: #888 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.back-btn:hover {
+    background-color: #666 !important;
 }
 
 /* Glassmorphism Card Style */

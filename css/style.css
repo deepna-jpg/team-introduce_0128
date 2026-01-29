@@ -1,4 +1,14 @@
-/* Basic Reset */
+/* 
+    Design Guide
+    - Font: 'Noto Sans KR', sans-serif
+    - Main Color: #333 (Dark Gray)
+    - Sub Color: #fff (White)
+    - Radius: 12px
+    - Padding: 16px
+    - Shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+*/
+
+/* Step B-1. Reset & Basic Typography */
 * {
     margin: 0;
     padding: 0;
@@ -14,7 +24,9 @@ body {
 
 /* Header Styles */
 header {
-    background-color: #333;
+    background-color: #3e000c;
+    /* Very Dark Burgundy */
+    /* Dark Navy */
     color: #fff;
     padding: 2rem 0;
     text-align: center;
@@ -37,7 +49,7 @@ main {
     padding: 0 1rem;
 }
 
-/* Team Container - Grid Layout */
+/* Step B-2. Grid Layout */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -45,21 +57,19 @@ main {
     justify-content: center;
 }
 
-/* 
-    [Member B's Area]
-    Card UI & Flip Animation 
-*/
+/* Step B-3 ~ B-5. Card UI & Flip Logic */
 
-.team-card {
+/* Card Container */
+.card {
     background-color: transparent;
     width: 100%;
     height: 400px;
-    /* Fixed height for flip effect */
     perspective: 1000px;
     /* Essential for 3D flip effect */
     cursor: pointer;
 }
 
+/* Flip Container */
 .card-inner {
     position: relative;
     width: 100%;
@@ -69,11 +79,12 @@ main {
     transform-style: preserve-3d;
 }
 
-/* Class to trigger flip */
-.team-card.flipped .card-inner {
+/* Flip Trigger State */
+.card.is-flipped .card-inner {
     transform: rotateY(180deg);
 }
 
+/* Front & Back Common Styles */
 .card-front,
 .card-back {
     position: absolute;
@@ -81,29 +92,113 @@ main {
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    border-radius: 15px;
+    border-radius: 12px;
+    /* Design Guide: 12px */
+    border: 4px solid #3e000c;
+    /* Thicker Burgundy Border */
+    padding: 16px;
+    /* Design Guide: 16px */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    background-color: #ffffdd;
+    /* Light Yellow */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Front Styling */
+.profile-img {
+    width: 180px;
+    /* Increased size */
+    height: 180px;
+    /* Increased size */
+    border-radius: 50%;
+    /* Circle */
+    margin-bottom: 20px;
+    object-position: top center;
+    /* Focus on face */
+    object-fit: cover;
+}
+
+/* Specific adjustment for the first member (Nayeon) */
+.grid-container .card:first-child .profile-img {
+    object-position: center 35%;
+    /* Raise the image content slightly */
 }
 
 .card-front h2 {
     margin-top: 1rem;
     color: #333;
+    font-size: 1.5rem;
 }
 
+.card-front p {
+    color: #666;
+    font-size: 1rem;
+}
+
+/* Back Styling */
 .card-back {
-    background-color: #333;
-    color: #fff;
+    background-color: #ffffdd;
+    /* Light Yellow */
+    /* Main Color */
+    color: #333;
+    /* Dark text for light background */
     transform: rotateY(180deg);
+}
+
+.card-back h3 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
 }
 
 .card-back p {
     margin: 0.5rem 0;
+    line-height: 1.5;
+    font-size: 0.95rem;
 }
 
-/* Responsive adjustments can be added here */
+/* Hover Effects (PC) */
+@media (hover: hover) {
+    /* .card:hover .card-inner rule removed as it was empty */
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .card:hover .card-front,
+    .card:hover .card-back {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* Step B-6. Responsive Design */
+@media (max-width: 768px) {
+    header {
+        padding: 1.5rem 0;
+    }
+
+    .header-content h1 {
+        font-size: 2rem;
+    }
+
+    main {
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr;
+        /* 1 column */
+        gap: 1.5rem;
+        /* Ensure card fills width */
+    }
+
+    .card {
+        height: auto;
+        min-height: 400px;
+        width: 100%;
+    }
+}

@@ -66,13 +66,13 @@ const renderer = {
 
     createCardElement(member) {
         const cardDiv = document.createElement('div');
-        cardDiv.classList.add('team-card');
+        cardDiv.classList.add('card');
 
         // Inner HTML structure for Flip Effect
         cardDiv.innerHTML = `
             <div class="card-inner">
                 <div class="card-front">
-                    <img src="${member.imagePath}" alt="${member.name}" style="width:100px; height:100px; border-radius:50%; margin-bottom:15px;">
+                    <img src="${member.imagePath}" alt="${member.name}" class="profile-img">
                     <h2>${member.name}</h2>
                     <p>${member.role}</p>
                 </div>
@@ -87,7 +87,7 @@ const renderer = {
 
         // Click Event for Flip
         cardDiv.addEventListener('click', () => {
-            cardDiv.classList.toggle('flipped');
+            cardDiv.classList.toggle('is-flipped');
         });
 
         return cardDiv;

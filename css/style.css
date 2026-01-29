@@ -1,40 +1,48 @@
 /* 
-    Design Guide
+    Design Guide - Premium Glassmorphism Edition
     - Font: 'Noto Sans KR', sans-serif
-    - Main Color: #333 (Dark Gray)
-    - Sub Color: #fff (White)
-    - Radius: 12px
-    - Padding: 16px
-    - Shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+    - Animation: Dynamic Gradient
+    - Effect: Backdrop Blur (Glass)
 */
 
 :root {
-    /* Light Theme Variables */
-    --bg-color: #effadd;
-    --text-color: #333;
-    --header-bg: #3e000c;
-    --header-color: #fff;
-    --card-bg: #ffffdd;
-    --card-border: #3e000c;
-    --card-text-muted: #666;
+    /* Theme Variables - Glassmorphism optimized */
+    --transition-speed: 0.5s;
+
+    /* Light Mode Glass */
+    --bg-gradient: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --text-color: #1a1a1a;
+    --header-color: #ffffff;
     --shadow: rgba(0, 0, 0, 0.1);
-    --transition-speed: 0.3s;
 }
 
 [data-theme='dark'] {
-    /* Dark Theme Variables */
-    --bg-color: #1a1a1a;
+    /* Dark Mode Glass */
+    --bg-gradient: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1a1a1a);
+    --glass-bg: rgba(0, 0, 0, 0.3);
+    --glass-border: rgba(255, 255, 255, 0.1);
     --text-color: #f0f0f0;
-    --header-bg: #000000;
-    --header-color: #e0e0e0;
-    --card-bg: #2d2d2d;
-    --card-border: #bb86fc;
-    /* Sleek Purple for dark mode border */
-    --card-text-muted: #aaa;
+    --header-color: #bb86fc;
     --shadow: rgba(0, 0, 0, 0.5);
 }
 
-/* Step B-1. Reset & Basic Typography */
+/* Dynamic Gradient Background Animation */
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -43,23 +51,28 @@
 
 body {
     font-family: 'Noto Sans KR', sans-serif;
-    background-color: var(--bg-color);
+    background: var(--bg-gradient);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
     color: var(--text-color);
     line-height: 1.6;
-    transition: background-color var(--transition-speed), color var(--transition-speed);
+    min-height: 100vh;
+    transition: color var(--transition-speed);
 }
 
 /* Header Styles */
 header {
-    background-color: var(--header-bg);
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     color: var(--header-color);
-    padding: 2rem 0;
+    padding: 3rem 0;
     text-align: center;
     position: relative;
-    transition: background-color var(--transition-speed), color var(--transition-speed);
+    border-bottom: 1px solid var(--glass-border);
+    margin-bottom: 2rem;
 }
 
-/* Theme Toggle Button */
 .theme-toggle-container {
     position: absolute;
     top: 20px;
@@ -67,97 +80,65 @@ header {
 }
 
 #themeToggle {
-    background: transparent;
-    border: 2px solid var(--header-color);
+    background: var(--glass-bg);
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--glass-border);
     color: var(--header-color);
-    padding: 8px 12px;
-    border-radius: 20px;
+    padding: 8px 16px;
+    border-radius: 30px;
     cursor: pointer;
-    font-weight: bold;
-    font-size: 0.9rem;
+    font-weight: 500;
     transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
 }
 
 #themeToggle:hover {
-    background-color: var(--header-color);
-    color: var(--header-bg);
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.4);
 }
 
 .header-content h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: -1px;
     margin-bottom: 0.5rem;
-}
-
-.team-quote {
-    font-style: italic;
-    opacity: 0.8;
-}
-
-/* Contact Button */
-.contact-btn {
-    display: inline-block;
-    margin-top: 1rem;
-    padding: 0.8rem 1.5rem;
-    background-color: #fff;
-    color: #3e000c;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 25px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.contact-btn:hover {
-    background-color: #f0f0f0;
-    transform: translateY(-2px);
-}
-
-/* Main Container Styles */
-main {
-    max-width: 1200px;
-    margin: 3rem auto;
-    padding: 0 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Step B-2. Grid Layout */
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    justify-content: center;
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
 }
 
-/* Step B-3 ~ B-5. Card UI & Flip Logic */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    padding: 2rem 0;
+}
 
-/* Card Container */
+/* Glassmorphism Card Style */
 .card {
     background-color: transparent;
     width: 100%;
-    height: 400px;
-    perspective: 1000px;
-    /* Essential for 3D flip effect */
+    height: 450px;
+    perspective: 1500px;
     cursor: pointer;
 }
 
-/* Flip Container */
 .card-inner {
     position: relative;
     width: 100%;
     height: 100%;
-    text-align: center;
-    transition: transform 0.6s;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform-style: preserve-3d;
 }
 
-/* Flip Trigger State */
 .card.is-flipped .card-inner {
     transform: rotateY(180deg);
 }
 
-/* Front & Back Common Styles */
 .card-front,
 .card-back {
     position: absolute;
@@ -165,96 +146,97 @@ main {
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    border-radius: 12px;
-    border: 4px solid var(--card-border);
-    padding: 16px;
-    box-shadow: 0 4px 8px var(--shadow);
-    background-color: var(--card-bg);
-    color: var(--text-color);
+    border-radius: 24px;
+    /* More rounded for modern look */
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 var(--shadow);
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: box-shadow 0.3s ease, transform 0.3s ease, background-color var(--transition-speed), border-color var(--transition-speed), color var(--transition-speed);
+    color: var(--text-color);
 }
 
-/* Front Styling */
+/* Card Front Content */
 .profile-img {
-    width: 180px;
-    height: 180px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
-    margin-bottom: 20px;
-    object-position: top center;
+    border: 4px solid var(--glass-border);
+    margin-bottom: 1.5rem;
     object-fit: cover;
-}
-
-/* Specific adjustment for the first member (Nayeon) */
-.grid-container .card:first-child .profile-img {
-    object-position: center 35%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .card-front h2 {
-    margin-top: 1rem;
-    color: var(--text-color);
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
 }
 
-.card-front p.role {
-    color: var(--card-text-muted);
-    font-size: 1rem;
+.card-front .role {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 12px;
+    border-radius: 12px;
 }
 
-/* Back Styling */
+/* Card Back Content */
 .card-back {
     transform: rotateY(180deg);
+    text-align: left;
+    align-items: flex-start;
 }
 
 .card-back h3 {
-    margin-bottom: 1rem;
-    font-size: 1.25rem;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 0.5rem;
 }
 
 .card-back p {
-    margin: 0.5rem 0;
-    line-height: 1.5;
+    margin-bottom: 0.8rem;
     font-size: 0.95rem;
 }
 
-/* Hover Effects (PC) */
+.card-back strong {
+    color: var(--header-color);
+    margin-right: 5px;
+}
+
+/* Hover Effects */
 @media (hover: hover) {
     .card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-10px);
     }
 
     .card:hover .card-front,
     .card:hover .card-back {
-        box-shadow: 0 8px 16px var(--shadow);
+        background: rgba(255, 255, 255, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.3);
     }
 }
 
-/* Step B-6. Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
-    header {
-        padding: 1.5rem 0;
-    }
-
     .header-content h1 {
-        font-size: 2rem;
-    }
-
-    main {
-        margin: 2rem auto;
-        padding: 0 1.5rem;
+        font-size: 2.2rem;
     }
 
     .grid-container {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 2rem;
     }
 
     .card {
-        height: auto;
-        min-height: 400px;
-        width: 100%;
+        height: 400px;
     }
 }

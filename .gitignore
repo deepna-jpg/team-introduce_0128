@@ -1,0 +1,14 @@
+# OS generated files (운영체제 자동 생성 파일)
+.DS_Store
+Thumbs.db
+
+# Editor directories and files (에디터 설정 파일)
+.idea
+.vscode/
+
+# Dependency directories (라이브러리 폴더 - 추후 npm 사용 시 필요)
+node_modules/
+
+# Logs (로그 파일)
+*.log
+npm-debug.log*

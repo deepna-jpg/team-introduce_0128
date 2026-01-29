@@ -56,6 +56,9 @@ body {
     animation: gradientBG 15s ease infinite;
     color: var(--text-color);
     line-height: 1.6;
+    /* Sticky Footer Setup */
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
     transition: color var(--transition-speed);
     overflow-x: hidden;
@@ -156,23 +159,193 @@ header {
 .header-content h1 {
     font-size: 3rem;
     font-weight: 700;
-    letter-spacing: -1px;
+    letter-spacing: 5px;
     margin-bottom: 0.5rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
-/* Step B-2. Grid Layout */
+.team-quote {
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* Contact Button */
+.contact-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.8rem 1.5rem;
+    background-color: #fff;
+    color: #3e000c;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.contact-btn:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+}
+
+/* Main Container Styles */
 main {
     max-width: 1200px;
     margin: 2rem auto;
     padding: 0 1.5rem;
+    flex: 1;
+    /* Pushes footer down */
+    width: 100%;
+    /* Ensure full width */
 }
 
+/* Step B-2. Grid Layout */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2.5rem;
     padding: 2rem 0;
+}
+
+/* Contact Page Specifics - Glassmorphism */
+.contact-card {
+    max-width: 600px;
+    margin: 0 auto;
+    cursor: default;
+    height: auto !important;
+
+    /* Glassmorphism Style */
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px 0 var(--shadow);
+    color: var(--text-color);
+
+    padding: 3rem;
+    margin-bottom: 3rem;
+
+    transform: none !important;
+    transition: all 0.3s ease;
+}
+
+.contact-card:hover {
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.3);
+}
+
+/* Form Styles */
+.contact-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.contact-header h2 {
+    color: var(--header-color);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contact-header p {
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+.contact-form .form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.contact-form label i {
+    margin-right: 8px;
+    color: #ffffff;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+
+    /* Glass Input */
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    backdrop-filter: blur(5px);
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: var(--text-color);
+    opacity: 0.6;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--header-color);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.form-actions {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.contact-btn {
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid var(--glass-border);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex: 1;
+    width: auto;
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+    color: var(--text-color);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.1);
+}
+
+.submit-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.2));
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px 0 rgba(0, 0, 0, 0.2);
+    color: var(--text-color);
+}
+
+.back-btn {
+    background: rgba(0, 0, 0, 0.2);
+    color: #fff !important;
+}
+
+.back-btn:hover {
+    background: rgba(0, 0, 0, 0.4) !important;
+    transform: translateY(-3px);
 }
 
 /* Glassmorphism Card Style */

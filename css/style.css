@@ -222,3 +222,129 @@ main {
         width: 100%;
     }
 }
+
+/* Contact Page Specific Styles */
+.contact-card {
+    background-color: #ffffdd;
+    /* Light Yam-color to match theme */
+    border: 4px solid #3e000c;
+    border-radius: 12px;
+    padding: 2.5rem;
+    max-width: 600px;
+    margin: 0 auto;
+    color: #333;
+    height: auto !important;
+    /* Override fixed height */
+    perspective: none !important;
+    /* Disable 3D space */
+    cursor: default !important;
+    display: block;
+    /* Ensure it behaves like a block */
+}
+
+.contact-card h2 {
+    color: #3e000c;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.contact-card p {
+    color: #555;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #3e000c;
+    font-size: 0.95rem;
+}
+
+.form-group label i {
+    width: 20px;
+    text-align: center;
+    margin-right: 8px;
+    color: #3e000c;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    /* Softer border initially */
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Noto Sans KR', sans-serif;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #3e000c;
+    background-color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(62, 0, 12, 0.1);
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.submit-btn {
+    background-color: #3e000c;
+    color: #fff;
+    border: 2px solid #3e000c;
+    cursor: pointer;
+    padding: 0.8rem 2rem;
+    margin-top: 0;
+    /* Reset */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.submit-btn:hover {
+    background-color: #5a0012;
+    border-color: #5a0012;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(62, 0, 12, 0.2);
+    color: #fff;
+    /* Ensure text remains white */
+}
+
+.back-btn {
+    background-color: transparent;
+    color: #3e000c;
+    border: 2px solid #3e000c;
+    padding: 0.8rem 2rem;
+    margin-top: 0;
+    /* Reset */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-btn:hover {
+    background-color: #3e000c;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(62, 0, 12, 0.15);
+}
+
+/* Remove hover transform from the main card container for contact form */
+.contact-card:hover {
+    transform: none;
+}

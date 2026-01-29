@@ -15,16 +15,17 @@ class TeamMember {
     }
 }
 
+// [Data] 팀 정보
+const teamInfo = {
+    name: "KPU",
+    description: "기획·디자인·개발이 분리되지 않고, 하나의 흐름으로 함께 작업합니다."
+};
+
 /**
  * Data Manager
  * Handles loading and providing team data
  */
 const dataManager = {
-    // Dummy Data for visual testing
-    teamInfo: {
-        name: "KPU",
-        description: "기획·디자인·개발이 분리되지 않고, 하나의 흐름으로 함께 작업합니다."
-    },
     members: [
         new TeamMember(
             "나연",
@@ -69,15 +70,17 @@ const renderer = {
         cardDiv.classList.add('card');
 
         // Inner HTML structure for Flip Effect
+        // Front: Image, Name, Role
+        // Back: Tasks, Intro, Skills
         cardDiv.innerHTML = `
             <div class="card-inner">
                 <div class="card-front">
-                    <img src="${member.imagePath}" alt="${member.name}" class="profile-img">
+                    <img src="${member.imagePath}" alt="${member.name}" class="profile-img" onerror="this.src='https://placehold.co/150?text=No+Img'">
                     <h2>${member.name}</h2>
-                    <p>${member.role}</p>
+                    <p class="role">${member.role}</p>
                 </div>
                 <div class="card-back">
-                    <h3>${member.name}</h3>
+                    <h3>${member.name} 상세 정보</h3>
                     <p><strong>담당:</strong> ${member.tasks}</p>
                     <p><strong>소개:</strong> ${member.intro}</p>
                     <p><strong>역량:</strong> ${member.skills}</p>
@@ -94,23 +97,26 @@ const renderer = {
     },
 
     renderTeamInfo() {
-        const info = dataManager.teamInfo;
         const headerTitle = document.querySelector('header h1');
         const headerQuote = document.querySelector('.team-quote');
 
-        if (headerTitle) headerTitle.textContent = info.name;
-        if (headerQuote) headerQuote.textContent = info.description;
+        if (headerTitle) headerTitle.textContent = teamInfo.name;
+        if (headerQuote) headerQuote.textContent = teamInfo.description;
     },
 
     renderAll() {
         const members = dataManager.getAllMembers();
-        if (!this.container) return; // Guard clause
+        if (!this.container) {
+            console.error("[Error] #teamGrid 요소를 찾을 수 없습니다.");
+            return;
+        }
 
         this.container.innerHTML = ''; // Clear existing content
         members.forEach(member => {
             const cardElement = this.createCardElement(member);
             this.container.appendChild(cardElement);
         });
+        console.log(`[System] ${members.length}명의 멤버 렌더링 완료.`);
     }
 };
 

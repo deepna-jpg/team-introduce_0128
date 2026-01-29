@@ -1,10 +1,9 @@
-/* [C 작업 산출물]
-    1. 데이터 스키마 정의: name, role, summary, detail, tags, img
-    2. 렌더링 위치: #team-container
-    3. 토글 클래스: .flipped
+/* [Merged Script]
+    - Features: Dynamic Team Cards (Member C), Header Info (Member B/Develop)
+    - Data: Combined Members + Team Info
 */
 
-// [Step C-1] 데이터 정의 (배열/JSON 구조)
+// [Data] 팀원 데이터 (최신화된 C 작업물)
 const members = [
     {
         id: 1,
@@ -17,44 +16,57 @@ const members = [
     {
         id: 2,
         name: "지현",
-        role: "UI/UX 디자인",
-        summary: "정보가 가장 잘 보이도록 화면의 흐름과 위계를 설계합니다.",
-        detail: "<strong>역할:</strong> UI/UX 디자인<br><strong>담당업무:</strong> 와이어프레임, 화면 설계, 시각적 완성도 <br><strong>특화역량:</strong> 가독성 중심 설계, 레이아웃 구성, 디자인 일관성",
+        role: "UX/UI Designer",
+        summary: "UI/UX 디자인",
+        detail: "정보가 가장 잘 보이도록 화면의 흐름과 위계를 설계합니다.",
         img: "https://placehold.co/150x150/e74c3c/white?text=LYH"
     },
     {
         id: 3,
         name: "아윤",
-        role: "프론트엔드 개발",
-        summary: "설계된 구조를 안정적으로 구현하고, 유지보수가 쉬운 코드로 정리합니다.",
-        detail: "<strong>역할:</strong> 프론트엔드 개발<br><strong>담당업무:</strong> 페이지 구현, 데이터 연동, 반응형 대응 <br><strong>특화역량:</strong> 컴포넌트 설계, 구조화된 코드, 배포 환경 구성",
+        role: "Frontend Developer",
+        summary: "코드로 가치를 만듭니다",
+        detail: "확장 가능하고 버그 없는 코드를 지향합니다.",
         img: "https://placehold.co/150x150/f1c40f/white?text=PJS"
     }
 ];
 
-// 상수 정의 (유지보수를 위해)
+// [Data] 팀 정보 (Develop 브랜치 내용 반영)
+const teamInfo = {
+    name: "KPU Team Project", // 'KPU' from develop, slightly enhanced
+    description: "기획·디자인·개발이 분리되지 않고, 하나의 흐름으로 함께 작업합니다."
+};
+
+// [Config] 상수 정의
 const DOM_ID = 'team-container';
 const FLIP_CLASS = 'flipped';
 
-// [Step C-2] 렌더링 함수
+// [Init] 초기화
 document.addEventListener('DOMContentLoaded', () => {
-    renderMembers();
-    bindEvents();
+    renderTeamInfo(); // Header Info
+    renderMembers();  // Cards
+    bindEvents();     // Interactions
 });
 
+// [Func] 헤더 정보 렌더링 (Develop 기능 통합)
+function renderTeamInfo() {
+    const headerTitle = document.querySelector('header h1');
+    const headerQuote = document.querySelector('.team-quote');
+
+    if (headerTitle) headerTitle.textContent = teamInfo.name;
+    if (headerQuote) headerQuote.textContent = teamInfo.description;
+}
+
+// [Func] 팀원 카드 렌더링
 function renderMembers() {
     const container = document.getElementById(DOM_ID);
 
-    // 안전장치: 컨테이너가 없으면 중단
     if (!container) {
         console.error(`[Error] #${DOM_ID} 요소를 찾을 수 없습니다.`);
         return;
     }
 
-    // HTML 생성 (map 사용)
     const htmlString = members.map(member => {
-
-        // 이미지 없을 경우 기본 이미지 처리 (Step C-5)
         const imgSrc = member.img ? member.img : 'images/default_profile.png';
 
         return `
@@ -80,18 +92,13 @@ function renderMembers() {
     console.log(`[System] ${members.length}명의 멤버 렌더링 완료.`);
 }
 
-// [Step C-3] 이벤트 바인딩 (이벤트 위임 방식)
+// [Func] 이벤트 바인딩
 function bindEvents() {
     const container = document.getElementById(DOM_ID);
     if (!container) return;
     container.addEventListener('click', (e) => {
-        // 클릭된 요소의 조상 중 가장 가까운 .team-card 찾기
         const card = e.target.closest('.team-card');
-
-        // .team-card 영역 밖을 클릭했으면 무시
         if (!card) return;
-
-        // 토글 실행
         card.classList.toggle(FLIP_CLASS);
     });
 }

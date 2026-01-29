@@ -159,9 +159,9 @@ header {
 .header-content h1 {
     font-size: 3rem;
     font-weight: 700;
-    letter-spacing: -1px;
+    letter-spacing: 5px;
     margin-bottom: 0.5rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 .team-quote {

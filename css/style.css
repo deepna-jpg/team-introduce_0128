@@ -39,7 +39,7 @@ main {
 }
 
 /* Team Container - Grid Layout */
-.team-container {
+.grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
@@ -83,8 +83,11 @@ main {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     border-radius: 15px;
+<<<<<<< HEAD
     border: 4px solid #fff59d;
     /* Light Yellow Border */
+=======
+>>>>>>> e96ffd9818ccaaa5058090dd2e04df92a5627a90
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     display: flex;

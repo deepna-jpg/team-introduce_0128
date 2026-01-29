@@ -1,19 +1,30 @@
-// [Member C's Area]
-// Data Structure & Logic
+/* [Merged Script]
+    - Features: Dynamic Team Cards (Member C), Header Info (Member B/Develop)
+    - Data: Combined Members + Team Info
+*/
 
-/**
- * Team Member Information Class
- */
+// [Class] 팀원 정보 구조 확인
 class TeamMember {
-    constructor(name, role, tasks, intro, skills, imagePath) {
+    constructor(name, role, work, summary, detail, img) {
+        this.id = name; // Simple ID using name
         this.name = name;
         this.role = role;
-        this.tasks = tasks; // string or array
-        this.intro = intro;
-        this.skills = skills;
-        this.imagePath = imagePath;
+        this.work = work;
+        this.summary = summary;
+        this.detail = detail;
+        this.img = img;
     }
 }
+
+// [Data] 팀 정보 (Develop 브랜치 내용 반영)
+const teamInfo = {
+    name: "KPU Team Project", // 'KPU' from develop, slightly enhanced
+    description: "기획·디자인·개발이 분리되지 않고, 하나의 흐름으로 함께 작업합니다."
+};
+
+// [Config] 상수 정의
+const DOM_ID = 'teamGrid';
+const FLIP_CLASS = 'flipped';
 
 /**
  * Data Manager
@@ -21,88 +32,112 @@ class TeamMember {
  */
 const dataManager = {
     // Dummy Data for visual testing
+    teamInfo: {
+        name: "KPU",
+        description: "기획·디자인·개발이 분리되지 않고, 하나의 흐름으로 함께 작업합니다."
+    },
     members: [
         new TeamMember(
-            "김팀장",
-            "PM / Publishing",
-            "전체 일정 관리, 구조 설계",
-            "팀의 중심을 잡는 리더입니다.",
-            "HTML/CSS, Communication",
-            "https://via.placeholder.com/150"
+            "나연",
+            "기획 · 구조 설계",
+            "사용자 목적 정리, 기능 범위 결정, 문서화",
+            "서비스의 목적과 사용자를 정의하고, 팀이 흔들리지 않도록 기준을 만듭니다.",
+            "문제정의, 정보 구조화, 의사결정 기준 수립",
+            "images/1.png"
         ),
         new TeamMember(
+<<<<<<< HEAD
             "유디자이너",
             "UI/UX Design",
             "화면 설계, 디자인 시스템",
             "사용자 경험을 최우선으로 생각합니다.",
             "Figma, CSS Animation",
             "https://via.placeholder.com/150"
+=======
+            "지현",
+            "UI/UX 디자인",
+            "와이어프레임, 화면 설계, 시각적 완성도",
+            "정보가 가장 잘 보이도록 화면의 흐름과 위계를 설계합니다.",
+            "가독성 중심 설계, 레이아웃 구성, 디자인 일관성",
+            "images/2.png"
+>>>>>>> e96ffd9818ccaaa5058090dd2e04df92a5627a90
         ),
         new TeamMember(
-            "박개발자",
-            "Frontend Dev",
-            "로직 구현, 데이터 바인딩",
-            "효율적인 코드를 작성합니다.",
-            "JavaScript, React",
-            "https://via.placeholder.com/150"
+            "아윤",
+            "프론트엔드 개발",
+            "페이지 구현, 데이터 연동, 반응형 대응",
+            "설계된 구조를 안정적으로 구현하고, 유지보수가 쉬운 코드로 정리합니다.",
+            "컴포넌트 설계, 구조화된 코드, 배포 환경 구성",
+            "images/3.png"
         )
-    ],
-
-    getAllMembers() {
-        return this.members;
-    }
+    ]
 };
 
-/**
- * UI Renderer
- * Handles DOM manipulation
- */
-const renderer = {
-    container: document.getElementById('team-container'),
+// [Step C-2] 렌더링 함수
+document.addEventListener('DOMContentLoaded', () => {
+    renderTeamInfo(); // Header Info
+    renderMembers();  // Cards
+    bindEvents();     // Interactions
+});
 
-    createCardElement(member) {
-        const cardDiv = document.createElement('div');
-        cardDiv.classList.add('team-card');
+// [Func] 헤더 정보 렌더링 (Develop 기능 통합)
+function renderTeamInfo() {
+    const headerTitle = document.querySelector('header h1');
+    const headerQuote = document.querySelector('.team-quote');
 
-        // Inner HTML structure for Flip Effect
-        cardDiv.innerHTML = `
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="${member.imagePath}" alt="${member.name}" style="width:100px; height:100px; border-radius:50%; margin-bottom:15px;">
-                    <h2>${member.name}</h2>
-                    <p>${member.role}</p>
-                </div>
-                <div class="card-back">
-                    <h3>${member.name}</h3>
-                    <p><strong>담당:</strong> ${member.tasks}</p>
-                    <p><strong>소개:</strong> ${member.intro}</p>
-                    <p><strong>역량:</strong> ${member.skills}</p>
+    if (headerTitle) headerTitle.textContent = teamInfo.name;
+    if (headerQuote) headerQuote.textContent = teamInfo.description;
+}
+
+// [Func] 팀원 카드 렌더링
+function renderMembers() {
+    const container = document.getElementById(DOM_ID);
+
+    if (!container) {
+        console.error(`[Error] #${DOM_ID} 요소를 찾을 수 없습니다.`);
+        return;
+    }
+
+    const htmlString = dataManager.members.map(member => {
+        const imgSrc = member.img ? member.img : 'images/default_profile.png';
+
+        return `
+            <div class="team-card" data-id="${member.id}">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="${imgSrc}" alt="${member.name}" style="width:100px; height:100px; border-radius:50%; margin-bottom:15px;" onerror="this.src='https://placehold.co/150?text=No+Img'">
+                        <h2>${member.name}</h2>
+                        <span class="role">${member.role}</span>
+                        <p class="summary">"${member.summary}"</p>
+                    </div>
+
+                    <div class="card-back">
+                        <h3>Detail Info</h3>
+                        <p class="detail">${member.detail}</p>
+                    </div>
                 </div>
             </div>
         `;
+    }).join('');
 
+<<<<<<< HEAD
         // Click Event for Flip
         cardDiv.addEventListener('click', () => {
             cardDiv.classList.toggle('is-flipped');
         });
+=======
+    container.innerHTML = htmlString;
+    console.log(`[System] ${dataManager.members.length}명의 멤버 렌더링 완료.`);
+}
+>>>>>>> e96ffd9818ccaaa5058090dd2e04df92a5627a90
 
-        return cardDiv;
-    },
-
-    renderAll() {
-        const members = dataManager.getAllMembers();
-        if (!this.container) return; // Guard clause
-
-        this.container.innerHTML = ''; // Clear existing content
-        members.forEach(member => {
-            const cardElement = this.createCardElement(member);
-            this.container.appendChild(cardElement);
-        });
-    }
-};
-
-// Initialize on window load
-window.addEventListener('DOMContentLoaded', () => {
-    renderer.renderAll();
-    console.log("Team Introduction Page Initialized");
-});
+// [Func] 이벤트 바인딩
+function bindEvents() {
+    const container = document.getElementById(DOM_ID);
+    if (!container) return;
+    container.addEventListener('click', (e) => {
+        const card = e.target.closest('.team-card');
+        if (!card) return;
+        card.classList.toggle(FLIP_CLASS);
+    });
+}

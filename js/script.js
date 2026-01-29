@@ -31,7 +31,7 @@ const dataManager = {
             "https://via.placeholder.com/150"
         ),
         new TeamMember(
-            "이디자이너",
+            "유디자이너",
             "UI/UX Design",
             "화면 설계, 디자인 시스템",
             "사용자 경험을 최우선으로 생각합니다.",
@@ -83,7 +83,7 @@ const renderer = {
 
         // Click Event for Flip
         cardDiv.addEventListener('click', () => {
-            cardDiv.classList.toggle('flipped');
+            cardDiv.classList.toggle('is-flipped');
         });
 
         return cardDiv;

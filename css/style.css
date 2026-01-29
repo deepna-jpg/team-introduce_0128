@@ -7,7 +7,8 @@
 
 body {
     font-family: 'Noto Sans KR', sans-serif;
-    background-color: #f4f6f8;
+    background-color: #effadd;
+    /* Light Yeon-du color */
     color: #333;
     line-height: 1.6;
 }
@@ -53,8 +54,10 @@ main {
 .team-card {
     background-color: transparent;
     width: 100%;
-    height: 400px; /* Fixed height for flip effect */
-    perspective: 1000px; /* Essential for 3D flip effect */
+    height: 400px;
+    /* Fixed height for flip effect */
+    perspective: 1000px;
+    /* Essential for 3D flip effect */
     cursor: pointer;
 }
 
@@ -67,19 +70,22 @@ main {
     transform-style: preserve-3d;
 }
 
-/* Class to trigger flip */
-.team-card.flipped .card-inner {
+/* Flip trigger class */
+.team-card.is-flipped .card-inner {
     transform: rotateY(180deg);
 }
 
-.card-front, .card-back {
+.card-front,
+.card-back {
     position: absolute;
     width: 100%;
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border: 4px solid #fff59d;
+    /* Light Yellow Border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     display: flex;
     flex-direction: column;

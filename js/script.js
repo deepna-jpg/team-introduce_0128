@@ -120,9 +120,46 @@ const renderer = {
     }
 };
 
+/**
+ * Theme Manager
+ * Handles Light/Dark mode switching
+ */
+const themeManager = {
+    toggleBtn: null,
+    currentTheme: localStorage.getItem('theme') || 'light',
+
+    init() {
+        this.toggleBtn = document.getElementById('themeToggle');
+        if (!this.toggleBtn) return;
+
+        // Apply saved theme
+        this.applyTheme(this.currentTheme);
+
+        // Event listener
+        this.toggleBtn.addEventListener('click', () => {
+            this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light';
+            this.applyTheme(this.currentTheme);
+            localStorage.setItem('theme', this.currentTheme);
+        });
+    },
+
+    applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+
+        // Update button text
+        const modeText = this.toggleBtn.querySelector('.mode-text');
+        if (modeText) {
+            modeText.textContent = theme === 'light' ? 'Dark Mode' : 'Light Mode';
+        }
+
+        console.log(`[System] Theme switched to: ${theme}`);
+    }
+};
+
 // Initialize on window load
 window.addEventListener('DOMContentLoaded', () => {
     renderer.renderTeamInfo();
     renderer.renderAll();
+    themeManager.init();
     console.log("Team Introduction Page Initialized");
 });

@@ -21,6 +21,10 @@ body {
     /* Light Yeon-du color */
     color: #333;
     line-height: 1.6;
+    /* Sticky Footer Setup */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* Header Styles */
@@ -67,6 +71,10 @@ main {
     max-width: 1200px;
     margin: 3rem auto;
     padding: 0 1rem;
+    flex: 1;
+    /* Pushes footer down */
+    width: 100%;
+    /* Ensure full width */
 }
 
 /* Step B-2. Grid Layout */
@@ -75,6 +83,147 @@ main {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     justify-content: center;
+}
+
+/* Contact Page Specifics */
+.contact-card {
+    max-width: 600px;
+    margin: 0 auto;
+    cursor: default;
+    cursor: default;
+    height: auto;
+    height: auto !important;
+    /* STRICTLY DYNAMIC HEIGHT */
+    padding: 1rem 2.5rem;
+    /* Reduced top padding */
+    padding-bottom: 5rem !important;
+    /* Force space below content */
+    margin-bottom: 3rem;
+    /* Space between card and footer */
+    padding: 1rem 2.5rem;
+    /* Reduced top padding */
+    padding-bottom: 5rem !important;
+    /* Force space below content */
+    margin-bottom: 3rem;
+    /* Space between card and footer */
+
+    /* Visual Styles (Copied from .card-front) */
+    background-color: #ffffdd;
+    border: 4px solid #3e000c;
+    border-radius: 12px;
+    /* Fixes square shadow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    /* Disable Flip/Move Effects */
+    transform: none !important;
+    transition: none !important;
+}
+
+/* Explicitly disable hover effect for contact card */
+.contact-card:hover {
+    transform: none !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    /* Consistent shadow */
+}
+
+/* Form Styles */
+.contact-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.contact-header h2 {
+    color: #3e000c;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-form .form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #3e000c;
+}
+
+.contact-form label i {
+    margin-right: 8px;
+    color: #3e000c;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #3e000c;
+    box-shadow: 0 0 0 3px rgba(62, 0, 12, 0.1);
+}
+
+.form-actions {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+/* Footer Styling */
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: auto;
+    /* Push to bottom if flex fails */
+}
+
+.submit-btn {
+    flex: 2;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #3e000c;
+    /* Burgundy */
+    color: #fff;
+    /* White text */
+    transform: translateY(-2px);
+}
+
+.back-btn {
+    flex: 1;
+    text-align: center;
+    background-color: #888 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.back-btn:hover {
+    background-color: #666 !important;
 }
 
 /* Step B-3 ~ B-5. Card UI & Flip Logic */

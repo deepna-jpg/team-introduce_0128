@@ -1,14 +1,48 @@
 /* 
-    Design Guide
+    Design Guide - Premium Glassmorphism Edition
     - Font: 'Noto Sans KR', sans-serif
-    - Main Color: #333 (Dark Gray)
-    - Sub Color: #fff (White)
-    - Radius: 12px
-    - Padding: 16px
-    - Shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+    - Animation: Dynamic Gradient
+    - Effect: Backdrop Blur (Glass)
 */
 
-/* Step B-1. Reset & Basic Typography */
+:root {
+    /* Theme Variables - Glassmorphism optimized */
+    --transition-speed: 0.5s;
+
+    /* Light Mode Glass */
+    --bg-gradient: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --text-color: #1a1a1a;
+    --header-color: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] {
+    /* Dark Mode Glass */
+    --bg-gradient: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1a1a1a);
+    --glass-bg: rgba(0, 0, 0, 0.3);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-color: #f0f0f0;
+    --header-color: #bb86fc;
+    --shadow: rgba(0, 0, 0, 0.5);
+}
+
+/* Dynamic Gradient Background Animation */
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -17,25 +51,117 @@
 
 body {
     font-family: 'Noto Sans KR', sans-serif;
-    background-color: #effadd;
-    /* Light Yeon-du color */
-    color: #333;
+    background: var(--bg-gradient);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: var(--text-color);
     line-height: 1.6;
+    /* Sticky Footer Setup */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: color var(--transition-speed);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Background Decorative Circles */
+.bg-circles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    animation: float 20s infinite alternate ease-in-out;
+}
+
+.circle-1 {
+    width: 400px;
+    height: 400px;
+    top: -100px;
+    left: -100px;
+    background: rgba(238, 119, 82, 0.2);
+}
+
+.circle-2 {
+    width: 300px;
+    height: 300px;
+    bottom: 10%;
+    right: -50px;
+    background: rgba(35, 166, 213, 0.2);
+    animation-delay: -5s;
+}
+
+.circle-3 {
+    width: 200px;
+    height: 200px;
+    top: 40%;
+    left: 15%;
+    background: rgba(231, 60, 126, 0.15);
+    animation-delay: -10s;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(50px, 50px) rotate(360deg);
+    }
 }
 
 /* Header Styles */
 header {
-    background-color: #3e000c;
-    /* Very Dark Burgundy */
-    /* Dark Navy */
-    color: #fff;
-    padding: 2rem 0;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--header-color);
+    padding: 3rem 0;
     text-align: center;
+    position: relative;
+    border-bottom: 1px solid var(--glass-border);
+    margin-bottom: 2rem;
+}
+
+.theme-toggle-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#themeToggle {
+    background: var(--glass-bg);
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--glass-border);
+    color: var(--header-color);
+    padding: 8px 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+#themeToggle:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.4);
 }
 
 .header-content h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: -1px;
     margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .team-quote {
@@ -65,46 +191,178 @@ header {
 /* Main Container Styles */
 main {
     max-width: 1200px;
-    margin: 3rem auto;
-    padding: 0 1rem;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    flex: 1;
+    /* Pushes footer down */
+    width: 100%;
+    /* Ensure full width */
 }
 
 /* Step B-2. Grid Layout */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    padding: 2rem 0;
 }
 
-/* Step B-3 ~ B-5. Card UI & Flip Logic */
+/* Contact Page Specifics */
+.contact-card {
+    max-width: 600px;
+    margin: 0 auto;
+    cursor: default;
+    height: auto !important;
+    /* STRICTLY DYNAMIC HEIGHT */
 
-/* Card Container */
+    /* Visual Styles (Copied from .card-front) */
+    background-color: #ffffdd;
+    /* Keep original contact card color for contrast */
+    border: 4px solid #3e000c;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    padding: 1rem 2.5rem;
+    /* Reduced top padding */
+    padding-bottom: 5rem !important;
+    /* Force space below content */
+    margin-bottom: 3rem;
+    /* Space between card and footer */
+
+    /* Disable Flip/Move Effects */
+    transform: none !important;
+    transition: none !important;
+}
+
+/* Explicitly disable hover effect for contact card */
+.contact-card:hover {
+    transform: none !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Form Styles */
+.contact-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.contact-header h2 {
+    color: #3e000c;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-form .form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #3e000c;
+}
+
+.contact-form label i {
+    margin-right: 8px;
+    color: #3e000c;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #3e000c;
+    /* Burgundy Highlight */
+    box-shadow: 0 0 0 3px rgba(62, 0, 12, 0.1);
+}
+
+.form-actions {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+/* Footer Styling */
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: auto;
+    /* Push to bottom if flex fails */
+    color: var(--text-color);
+}
+
+.submit-btn {
+    flex: 2;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #3e000c;
+    /* Burgundy */
+    color: #fff;
+    /* White text */
+    transform: translateY(-2px);
+}
+
+.back-btn {
+    flex: 1;
+    text-align: center;
+    background-color: #888 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.back-btn:hover {
+    background-color: #666 !important;
+}
+
+/* Glassmorphism Card Style */
 .card {
     background-color: transparent;
     width: 100%;
-    height: 400px;
-    perspective: 1000px;
-    /* Essential for 3D flip effect */
+    height: 450px;
+    perspective: 1500px;
     cursor: pointer;
 }
 
-/* Flip Container */
 .card-inner {
     position: relative;
     width: 100%;
     height: 100%;
-    text-align: center;
-    transition: transform 0.6s;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform-style: preserve-3d;
 }
 
-/* Flip Trigger State */
 .card.is-flipped .card-inner {
     transform: rotateY(180deg);
 }
 
-/* Front & Back Common Styles */
 .card-front,
 .card-back {
     position: absolute;
@@ -112,239 +370,97 @@ main {
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    border-radius: 12px;
-    /* Design Guide: 12px */
-    border: 4px solid #3e000c;
-    /* Thicker Burgundy Border */
-    padding: 16px;
-    /* Design Guide: 16px */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #ffffdd;
-    /* Light Yellow */
+    border-radius: 24px;
+    /* More rounded for modern look */
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 var(--shadow);
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    color: var(--text-color);
 }
 
-/* Front Styling */
+/* Card Front Content */
 .profile-img {
-    width: 180px;
-    /* Increased size */
-    height: 180px;
-    /* Increased size */
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
-    /* Circle */
-    margin-bottom: 20px;
-    object-position: top center;
-    /* Focus on face */
+    border: 4px solid var(--glass-border);
+    margin-bottom: 1.5rem;
     object-fit: cover;
-}
-
-/* Specific adjustment for the first member (Nayeon) */
-.grid-container .card:first-child .profile-img {
-    object-position: center 35%;
-    /* Raise the image content slightly */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .card-front h2 {
-    margin-top: 1rem;
-    color: #333;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
 }
 
-.card-front p {
-    color: #666;
-    font-size: 1rem;
+.card-front .role {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 12px;
+    border-radius: 12px;
 }
 
-/* Back Styling */
+/* Card Back Content */
 .card-back {
-    background-color: #ffffdd;
-    /* Light Yellow */
-    /* Main Color */
-    color: #333;
-    /* Dark text for light background */
     transform: rotateY(180deg);
+    text-align: left;
+    align-items: flex-start;
 }
 
 .card-back h3 {
-    margin-bottom: 1rem;
-    font-size: 1.25rem;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 0.5rem;
 }
 
 .card-back p {
-    margin: 0.5rem 0;
-    line-height: 1.5;
+    margin-bottom: 0.8rem;
     font-size: 0.95rem;
 }
 
-/* Hover Effects (PC) */
-@media (hover: hover) {
-    /* .card:hover .card-inner rule removed as it was empty */
+.card-back strong {
+    color: var(--header-color);
+    margin-right: 5px;
+}
 
+/* Hover Effects */
+@media (hover: hover) {
     .card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-10px);
     }
 
     .card:hover .card-front,
     .card:hover .card-back {
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        background: rgba(255, 255, 255, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.3);
     }
 }
 
-/* Step B-6. Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
-    header {
-        padding: 1.5rem 0;
-    }
-
     .header-content h1 {
-        font-size: 2rem;
-    }
-
-    main {
-        margin: 2rem auto;
-        padding: 0 1.5rem;
+        font-size: 2.2rem;
     }
 
     .grid-container {
         grid-template-columns: 1fr;
-        /* 1 column */
-        gap: 1.5rem;
-        /* Ensure card fills width */
+        gap: 2rem;
     }
 
     .card {
-        height: auto;
-        min-height: 400px;
-        width: 100%;
+        height: 400px;
     }
-}
-
-/* Contact Page Specific Styles */
-.contact-card {
-    background-color: #ffffdd;
-    /* Light Yam-color to match theme */
-    border: 4px solid #3e000c;
-    border-radius: 12px;
-    padding: 2.5rem;
-    max-width: 600px;
-    margin: 0 auto;
-    color: #333;
-    height: auto !important;
-    /* Override fixed height */
-    perspective: none !important;
-    /* Disable 3D space */
-    cursor: default !important;
-    display: block;
-    /* Ensure it behaves like a block */
-}
-
-.contact-card h2 {
-    color: #3e000c;
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-    text-align: center;
-}
-
-.contact-card p {
-    color: #555;
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    color: #3e000c;
-    font-size: 0.95rem;
-}
-
-.form-group label i {
-    width: 20px;
-    text-align: center;
-    margin-right: 8px;
-    color: #3e000c;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 12px 15px;
-    border: 2px solid #ddd;
-    /* Softer border initially */
-    border-radius: 8px;
-    font-size: 1rem;
-    font-family: 'Noto Sans KR', sans-serif;
-    transition: all 0.3s ease;
-    background-color: #f9f9f9;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    border-color: #3e000c;
-    background-color: #fff;
-    outline: none;
-    box-shadow: 0 0 0 4px rgba(62, 0, 12, 0.1);
-}
-
-.form-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 2rem;
-    flex-wrap: wrap;
-}
-
-.submit-btn {
-    background-color: #3e000c;
-    color: #fff;
-    border: 2px solid #3e000c;
-    cursor: pointer;
-    padding: 0.8rem 2rem;
-    margin-top: 0;
-    /* Reset */
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.submit-btn:hover {
-    background-color: #5a0012;
-    border-color: #5a0012;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(62, 0, 12, 0.2);
-    color: #fff;
-    /* Ensure text remains white */
-}
-
-.back-btn {
-    background-color: transparent;
-    color: #3e000c;
-    border: 2px solid #3e000c;
-    padding: 0.8rem 2rem;
-    margin-top: 0;
-    /* Reset */
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.back-btn:hover {
-    background-color: #3e000c;
-    color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(62, 0, 12, 0.15);
-}
-
-/* Remove hover transform from the main card container for contact form */
-.contact-card:hover {
-    transform: none;
 }
